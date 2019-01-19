@@ -1,0 +1,9 @@
+@import "variables.scss";
+.authorization-form-container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  @extend %authorization-backround;
+}
