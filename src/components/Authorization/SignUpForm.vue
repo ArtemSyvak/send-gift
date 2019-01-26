@@ -24,23 +24,35 @@
                         <md-input v-model="password" type="password"></md-input>
                     </md-field>
                 </md-card-content>
+                <md-card-actions class="login-card-actions">
+                    <md-button class="md-primary" @click="signUp">Create User</md-button>
+                </md-card-actions>
             </md-card>
         </form>
     </div>
 </template>
 
 <script>
-    export default {
-        name: "SignUpForm",
-        data(){
-            return{
-                firstname: '',
-                lastname: '',
-                email: '',
-                password: ''
-            }
+import UserService from '../../services/UserService'
+export default {
+    name: "SignUpForm",
+    data(){
+        return{
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: ''
+        }
+    },
+    methods:{
+        signUp(){
+            UserService
+                .signUp(this.firstname,this.lastname,this.email,this.password)
+                .then(res=> console.log(res))
+                .catch(error => console.log(error));
         }
     }
+}
 </script>
 
 <style lang="scss" scoped>

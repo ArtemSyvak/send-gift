@@ -16,7 +16,7 @@
                     </md-field>
                 </md-card-content>
                 <md-card-actions class="login-card-actions">
-                    <md-button class="md-primary">Login</md-button>
+                    <md-button class="md-primary" @click="login">Login</md-button>
                     <router-link
                             :to="{path: 'sign-up'}"
                              tag="md-button"
@@ -29,12 +29,21 @@
 </template>
 
 <script>
+    import UserService from '../../services/UserService'
     export default {
         name: "LoginForm",
         data(){
             return{
                 email: '',
                 password: ''
+            }
+        },
+        methods:{
+            login(){
+                UserService
+                    .login(this.email,this.password)
+                    .then(res => {console.log(res,'hello!')})
+                    .catch(err => {console.log(err)});
             }
         }
     }
