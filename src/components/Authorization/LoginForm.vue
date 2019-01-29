@@ -8,11 +8,16 @@
                 <md-card-content>
                     <md-field>
                         <label>Email</label>
-                        <md-input v-model="email"></md-input>
+                        <md-input placeholder="Email"
+                                  v-model="email">
+                        </md-input>
                     </md-field>
                     <md-field>
                         <label>Password</label>
-                        <md-input v-model="password" type="password"></md-input>
+                        <md-input placeholder="Password"
+                                  v-model="password"
+                                  type="password">
+                        </md-input>
                     </md-field>
                 </md-card-content>
                 <md-card-actions class="login-card-actions">
@@ -38,12 +43,37 @@
                 password: ''
             }
         },
+        computed: {
+            user: {
+                get(){
+                    return this.$store.user
+                },
+                set(user){
+                    this.$store.commit('setUser', user)
+                }
+            },
+            token: {
+                get(){
+                    return this.$store.token
+                },
+                set(token){
+                    this.$store.commit('setToken',token)
+                }
+            }
+        },
         methods:{
             login(){
                 UserService
                     .login(this.email,this.password)
-                    .then(res => {console.log(res,'hello!')})
-                    .catch(err => {console.log(err)});
+                    .then(res => {
+                        if(res){
+                            console.log(res);
+                            this.user = res.data.user;
+                            this.token = res.data.token;
+                        }
+                        else return false
+                    })
+                    .catch(err => {console.log(err)})
             }
         }
     }

@@ -33,7 +33,8 @@ exports.create_user = (req, res, next)=> {
                                 .then(result=>{
                                     console.log(result);
                                     res.status(201).json({
-                                        message: 'User created'
+                                        message: 'User created',
+                                        user: user
                                     })
                                 })
                                 .catch(err=>{
@@ -80,7 +81,8 @@ exports.user_login = (req, res, next) => {
                     console.log(res.get('Authorization'));
                     return res.status(200).json({
                         message: 'Auth successful !',
-                        token: token
+                        token: token,
+                        user: user[0]
                     })
                 }
                 res.status(401).json({
