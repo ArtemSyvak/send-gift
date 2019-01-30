@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-// const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
@@ -78,11 +77,17 @@ exports.user_login = (req, res, next) => {
                         }
                     );
                     res.set('Authorization', `Bearer ${token}`);
-                    console.log(res.get('Authorization'));
+                    const responseUser ={
+                        _id: user[0]._id,
+                        email: user[0].email,
+                        firstname: user[0].firstname,
+                        lastname: user[0].lastname
+
+                    }
                     return res.status(200).json({
                         message: 'Auth successful !',
                         token: token,
-                        user: user[0]
+                        user: responseUser
                     })
                 }
                 res.status(401).json({
@@ -96,6 +101,30 @@ exports.user_login = (req, res, next) => {
                 error: err
             });
         });
+};
+
+//get all users from db
+exports.get_users = (req, res, next) => {
+    console.log("hello!");
+    User.find()
+        .select('_id email firstname lastname')
+        .exec()
+        .then(userList => {
+            console.log(userList);
+            const response = {
+                count: userList.length,
+                users: userList.map(user =>{
+                    return{
+                        _id: user._id,
+                        email: user.email,
+                        firstname: user.firstname,
+                        lastname: user.lastname
+                    }
+                })
+            };
+            res.status(200).json(response);
+        })
+        .catch(err => res.status(500).json({error:err}))
 };
 
 // remove user from db

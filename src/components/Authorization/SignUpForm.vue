@@ -1,7 +1,7 @@
 <template>
     <div class="authorization-form-container">
 
-        <form class="sign-up-form">
+        <form class="animated fadeIn sign-up-form">
             <md-card>
                 <md-card-header>
                     <div class="md-title">Send Gift</div>
@@ -33,7 +33,7 @@
                         </md-input>
                     </md-field>
                 </md-card-content>
-                <md-card-actions class="login-card-actions">
+                <md-card-actions class="card-actions">
                     <router-link
                             :to="{path: 'login'}"
                             tag="md-button"
@@ -88,5 +88,8 @@ export default {
     @import "../../scss/authorization.scss";
     .sign-up-form{
         align-self: center;
+        .card-actions{
+            justify-content: space-between;
+        }
     }
 </style>

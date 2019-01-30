@@ -1,10 +1,12 @@
 <template>
     <div class="authorization-form-container">
-        <form class="login-form">
+        <form class="animated fadeIn login-form">
+
             <md-card>
                 <md-card-header>
                     <div class="md-title">Send Gift</div>
                 </md-card-header>
+
                 <md-card-content>
                     <md-field>
                         <label>Email</label>
@@ -12,6 +14,7 @@
                                   v-model="email">
                         </md-input>
                     </md-field>
+
                     <md-field>
                         <label>Password</label>
                         <md-input placeholder="Password"
@@ -20,7 +23,8 @@
                         </md-input>
                     </md-field>
                 </md-card-content>
-                <md-card-actions class="login-card-actions">
+
+                <md-card-actions class="card-actions">
                     <md-button class="md-primary" @click="login">Login</md-button>
                     <router-link
                             :to="{path: 'sign-up'}"
@@ -29,6 +33,7 @@
                     </router-link>
                 </md-card-actions>
             </md-card>
+
         </form>
     </div>
 </template>
@@ -83,7 +88,7 @@
     @import "../../scss/authorization.scss";
     .login-form{
         align-self: center;
-        .login-card-actions{
+        .card-actions{
             justify-content: space-between;
         }
     }

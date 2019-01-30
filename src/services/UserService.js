@@ -4,11 +4,6 @@ class UserService {
     constructor(){
         this.baseUrl = `localhost:8080`
     }
-    testAxios(){
-       return axios
-            .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-            .then(response => (alert(JSON.stringify(response.data.bpi))));
-    }
     signUp(firstname,lastname,email,password){
            return axios
             .post(`//${this.baseUrl}/user/signup`, {
@@ -28,6 +23,13 @@ class UserService {
                     password: password
                 }
             })
+    }
+    getAllUsers(){
+         return axios.post(`//${this.baseUrl}/user/all`,{
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
     }
 }
 export default new UserService();
