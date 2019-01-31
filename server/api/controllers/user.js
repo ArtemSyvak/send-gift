@@ -104,13 +104,11 @@ exports.user_login = (req, res, next) => {
 };
 
 //get all users from db
-exports.get_users = (req, res, next) => {
-    console.log("hello!");
+exports.get_users = (req, res, next) => {;
     User.find()
         .select('_id email firstname lastname')
         .exec()
         .then(userList => {
-            console.log(userList);
             const response = {
                 count: userList.length,
                 users: userList.map(user =>{

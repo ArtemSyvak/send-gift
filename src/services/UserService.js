@@ -1,8 +1,10 @@
 import axios from 'axios'
+const dotenv = require('dotenv');
+dotenv.config();
 
 class UserService {
     constructor(){
-        this.baseUrl = `localhost:8080`
+        this.baseUrl = `localhost:${process.env.PORT}`
     }
     signUp(firstname,lastname,email,password){
            return axios
@@ -25,7 +27,7 @@ class UserService {
             })
     }
     getAllUsers(){
-         return axios.post(`//${this.baseUrl}/user/all`,{
+         return axios.get(`//${this.baseUrl}/user/all`,{
             headers:{
                 'Content-Type': 'application/json'
             }

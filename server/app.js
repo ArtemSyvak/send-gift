@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/", serveStatic(path.join(__dirname, "../dist")));
-app.use("/*", serveStatic(path.join(__dirname, "../dist/index.html")));
+// app.use("/*", serveStatic(path.join(__dirname, "../dist/index.html")));
 
 // Routes
 app.use('/user', userRoutes);

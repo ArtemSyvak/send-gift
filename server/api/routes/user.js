@@ -7,7 +7,7 @@ router.post('/signup' , UserController.create_user);
 
 router.post('/login', UserController.user_login);
 
-router.post('/all', UserController.get_users);
+router.get('/all', UserController.get_users);
 
 router.delete('/:userId', UserController.delete_user);
 
