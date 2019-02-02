@@ -4,7 +4,7 @@ dotenv.config();
 
 class UserService {
     constructor(){
-        this.baseUrl = `localhost:${process.env.PORT}`
+        this.baseUrl = `localhost:${process.env.PORT || 8080}`
     }
     signUp(firstname,lastname,email,password){
            return axios

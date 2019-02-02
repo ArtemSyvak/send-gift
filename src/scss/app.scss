@@ -4,6 +4,9 @@
         accent: #1a11e8 // The secondary color of your brand
 ));
 @import "~vue-material/dist/theme/all";
+.logo{
+  max-height: 100px;
+}
 .md-card{
-  border-radius: 7px;
+  border-radius: 7px!important;
 }

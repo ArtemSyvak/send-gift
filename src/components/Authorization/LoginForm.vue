@@ -4,7 +4,9 @@
 
             <md-card>
                 <md-card-header>
-                    <div class="md-title">Send Gift</div>
+                    <div class="md-title md-layout md-gutter md-alignment-center-center ">
+                        <Logo/>
+                    </div>
                 </md-card-header>
 
                 <md-card-content>
@@ -40,6 +42,7 @@
 
 <script>
     import UserService from '../../services/UserService'
+    import Logo from '../Layout/Logo'
     export default {
         name: "LoginForm",
         data(){
@@ -48,13 +51,14 @@
                 password: ''
             }
         },
+        components:{Logo},
         computed: {
             user: {
                 get(){
                     return this.$store.user
                 },
                 set(user){
-                    this.$store.commit('setUser', user)
+                    this.$store.commit('setState', ['user',user]);
                 }
             },
             token: {
@@ -62,7 +66,7 @@
                     return this.$store.token
                 },
                 set(token){
-                    this.$store.commit('setToken',token)
+                    this.$store.commit('setState',['token', token])
                 }
             }
         },

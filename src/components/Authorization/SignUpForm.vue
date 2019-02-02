@@ -4,7 +4,9 @@
         <form class="animated fadeIn sign-up-form">
             <md-card>
                 <md-card-header>
-                    <div class="md-title">Send Gift</div>
+                    <div class="md-title md-layout md-gutter md-alignment-center-center ">
+                        <Logo/>
+                    </div>
                 </md-card-header>
 
                 <md-card-content>
@@ -48,6 +50,7 @@
 
 <script>
 import UserService from '../../services/UserService'
+import Logo from '../Layout/Logo'
 export default {
     name: "SignUpForm",
     data(){
@@ -58,13 +61,14 @@ export default {
             password: ''
         }
     },
+    components:{Logo},
     computed:{
       user: {
           get(){
               return this.$store.user
           },
           set(user){
-              this.$store.commit('setUser',user)
+              this.$store.commit('setState',['user',user])
           }
       }
     },
