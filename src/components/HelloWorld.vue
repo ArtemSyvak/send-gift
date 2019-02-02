@@ -9,8 +9,6 @@
 export default {
   name: 'HelloWorld',
     mounted(){
-      let user =  {username:'artem'};
-      setState('', user);
       UserService
           .getAllUsers()
           .then(res=>console.log(res))
