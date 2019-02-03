@@ -1,7 +1,7 @@
 <template>
     <div class="authorization-form-container">
 
-        <form class="animated fadeIn sign-up-form">
+        <form class="animated fadeIn sign-up-form md-layout-item md-size-20">
             <md-card>
                 <md-card-header>
                     <div class="md-title md-layout md-gutter md-alignment-center-center ">
@@ -12,13 +12,13 @@
                 <md-card-content>
                     <md-field>
                         <label>First Name</label>
-                        <md-input placeholder="Firstname"
+                        <md-input placeholder="First name"
                                   v-model="firstname">
                         </md-input>
                     </md-field>
                     <md-field>
                         <label>Last Name</label>
-                        <md-input placeholder="Lastname"
+                        <md-input placeholder="Last name"
                                   v-model="lastname">
                         </md-input>
                     </md-field>
@@ -31,7 +31,8 @@
                     <md-field>
                         <label>Password</label>
                         <md-input placeholder="Password"
-                                  v-model="password" type="password">
+                                  v-model="password"
+                                  type="password">
                         </md-input>
                     </md-field>
                 </md-card-content>
@@ -70,19 +71,36 @@ export default {
           set(user){
               this.$store.commit('setState',['user',user])
           }
-      }
+      },
+        // email: {
+        //     get(){
+        //         return this.$store.email
+        //     },
+        //     set(email){
+        //         this.$store.commit('setState', ['email',email]);
+        //     }
+        // },
+        // password: {
+        //     get(){
+        //         return this.$store.password
+        //     },
+        //     set(password){
+        //         this.$store.commit('setState', ['password',password]);
+        //     }
+        // }
     },
     methods:{
-        signUp(){
+       signUp(){
             UserService
                 .signUp(this.firstname,this.lastname,this.email,this.password)
                 .then(res=>{
                     if(res.data.user){
                        this.user = res.data.user;
+                       this.router.push('/dashboard');
                     }
                     else return false
                 })
-                .catch(error => console.log(error));
+                .catch(error => console.log(error.error));
         }
     }
 }

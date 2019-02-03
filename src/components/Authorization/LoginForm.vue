@@ -1,6 +1,6 @@
 <template>
     <div class="authorization-form-container">
-        <form class="animated fadeIn login-form">
+        <form class="animated fadeIn login-form md-layout-item md-size-20">
 
             <md-card>
                 <md-card-header>
@@ -46,10 +46,10 @@
     export default {
         name: "LoginForm",
         data(){
-            return{
-                email: '',
-                password: ''
-            }
+          return{
+              email:'',
+              password:''
+          }
         },
         components:{Logo},
         computed: {
@@ -68,6 +68,30 @@
                 set(token){
                     this.$store.commit('setState',['token', token])
                 }
+            },
+            // email: {
+            //     get(){
+            //         return this.$store.email
+            //     },
+            //     set(email){
+            //         this.$store.commit('setState', ['email',email]);
+            //     }
+            // },
+            // password: {
+            //     get(){
+            //         return this.$store.password
+            //     },
+            //     set(password){
+            //         this.$store.commit('setState', ['password',password]);
+            //     }
+            // },
+            isLogged:{
+                get(){
+                    return this.$store.isLogged
+                },
+                set(isLogged){
+                    this.$store.commit('setState', ['isLogged', isLogged])
+                }
             }
         },
         methods:{
@@ -75,10 +99,13 @@
                 UserService
                     .login(this.email,this.password)
                     .then(res => {
-                        if(res){
-                            console.log(res);
+                        if(res.data){
+                            localStorage.setItem('user', JSON.stringify(res.data.user));
+                            localStorage.setItem('token', res.data.token);
                             this.user = res.data.user;
                             this.token = res.data.token;
+                            this.isLogged = true;
+                            this.$router.push('/dashboard');
                         }
                         else return false
                     })

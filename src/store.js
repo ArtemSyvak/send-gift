@@ -4,8 +4,11 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
+    isLogged:false,
     user:null,
-    token:''
+    token:'',
+    email:'',
+    password:''
   },
   mutations: {
     // set or update any properties of state
