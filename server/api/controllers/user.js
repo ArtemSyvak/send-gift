@@ -5,7 +5,6 @@ const User = require('../models/user');
 
 // add new user to db
 exports.create_user = (req, res, next)=> {
-    console.log(req);
     User.find({email:req.body.params.email})
         .exec()
         .then(user => {
@@ -52,7 +51,6 @@ exports.create_user = (req, res, next)=> {
 
 // init sign in
 exports.user_login = (req, res, next) => {
-    console.log(req);
     User.find({email: req.body.params.email})
         .exec()
         .then(user => {

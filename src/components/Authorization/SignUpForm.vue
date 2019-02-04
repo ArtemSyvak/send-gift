@@ -57,37 +57,35 @@ export default {
     data(){
         return{
             firstname: '',
-            lastname: '',
-            email: '',
-            password: ''
+            lastname: ''
         }
     },
     components:{Logo},
     computed:{
       user: {
           get(){
-              return this.$store.user
+              return this.$store.state.user
           },
           set(user){
               this.$store.commit('setState',['user',user])
           }
       },
-        // email: {
-        //     get(){
-        //         return this.$store.email
-        //     },
-        //     set(email){
-        //         this.$store.commit('setState', ['email',email]);
-        //     }
-        // },
-        // password: {
-        //     get(){
-        //         return this.$store.password
-        //     },
-        //     set(password){
-        //         this.$store.commit('setState', ['password',password]);
-        //     }
-        // }
+        email: {
+            get(){
+                return this.$store.state.email
+            },
+            set(email){
+                this.$store.commit('setState', ['email',email]);
+            }
+        },
+        password: {
+            get(){
+                return this.$store.state.password
+            },
+            set(password){
+                this.$store.commit('setState', ['password',password]);
+            }
+        }
     },
     methods:{
        signUp(){
@@ -96,11 +94,11 @@ export default {
                 .then(res=>{
                     if(res.data.user){
                        this.user = res.data.user;
-                       this.router.push('/dashboard');
+                       this.$router.push('/login');
                     }
                     else return false
                 })
-                .catch(error => console.log(error.error));
+                .catch(error => console.log(error));
         }
     }
 }

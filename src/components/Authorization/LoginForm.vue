@@ -20,18 +20,23 @@
                     <md-field>
                         <label>Password</label>
                         <md-input placeholder="Password"
-                                  v-model="password"
-                                  type="password">
+                                  type="password"
+                                  v-model="password">
                         </md-input>
                     </md-field>
                 </md-card-content>
 
                 <md-card-actions class="card-actions">
-                    <md-button class="md-primary" @click="login">Login</md-button>
+                    <md-button class="md-primary"
+                               @click="login"
+                               @keyup.enter="login">
+                        Login
+                    </md-button>
                     <router-link
                             :to="{path: 'sign-up'}"
                              tag="md-button"
-                            class="md-primary">Sign Up
+                            class="md-primary">
+                        Sign Up
                     </router-link>
                 </md-card-actions>
             </md-card>
@@ -45,49 +50,43 @@
     import Logo from '../Layout/Logo'
     export default {
         name: "LoginForm",
-        data(){
-          return{
-              email:'',
-              password:''
-          }
-        },
         components:{Logo},
         computed: {
-            user: {
+            user:{
                 get(){
-                    return this.$store.user
+                    return this.$store.state.user
                 },
                 set(user){
                     this.$store.commit('setState', ['user',user]);
                 }
             },
-            token: {
+            token:{
                 get(){
-                    return this.$store.token
+                    return this.$store.state.token
                 },
                 set(token){
                     this.$store.commit('setState',['token', token])
                 }
             },
-            // email: {
-            //     get(){
-            //         return this.$store.email
-            //     },
-            //     set(email){
-            //         this.$store.commit('setState', ['email',email]);
-            //     }
-            // },
-            // password: {
-            //     get(){
-            //         return this.$store.password
-            //     },
-            //     set(password){
-            //         this.$store.commit('setState', ['password',password]);
-            //     }
-            // },
+            email: {
+                get(){
+                    return this.$store.state.email;
+                },
+                set(email){
+                    this.$store.commit('setState', ['email',email]);
+                }
+            },
+            password: {
+                get(){
+                    return this.$store.state.password
+                },
+                set(password){
+                    this.$store.commit('setState', ['password',password]);
+                }
+            },
             isLogged:{
                 get(){
-                    return this.$store.isLogged
+                    return this.$store.state.isLogged
                 },
                 set(isLogged){
                     this.$store.commit('setState', ['isLogged', isLogged])
