@@ -8,14 +8,14 @@ class UserService {
     }
     signUp(firstname,lastname,email,password){
            return axios
-            .post(`//${this.baseUrl}/user/signup`, {
-                params: {
-                    firstname: firstname,
-                    lastname: lastname,
-                    email: email,
-                    password: password
-                }
-            })
+                .post(`//${this.baseUrl}/user/signup`, {
+                    params: {
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        password: password
+                    }
+                })
     }
     login(email,password){
         return axios

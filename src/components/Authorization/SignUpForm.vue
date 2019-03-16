@@ -52,6 +52,11 @@
 <script>
 import UserService from '../../services/UserService'
 import Logo from '../Layout/Logo'
+import VuexHelper from '../../helpers/VuexHelper';
+
+const properties = ['user', 'email', 'password'];
+const storeProperties = VuexHelper.initComputed(...properties);
+
 export default {
     name: "SignUpForm",
     data(){
@@ -61,32 +66,7 @@ export default {
         }
     },
     components:{Logo},
-    computed:{
-      user: {
-          get(){
-              return this.$store.state.user
-          },
-          set(user){
-              this.$store.commit('setState',['user',user])
-          }
-      },
-        email: {
-            get(){
-                return this.$store.state.email
-            },
-            set(email){
-                this.$store.commit('setState', ['email',email]);
-            }
-        },
-        password: {
-            get(){
-                return this.$store.state.password
-            },
-            set(password){
-                this.$store.commit('setState', ['password',password]);
-            }
-        }
-    },
+    computed:{...storeProperties},
     methods:{
        signUp(){
             UserService

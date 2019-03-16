@@ -34,7 +34,7 @@
                     </md-button>
                     <router-link
                             :to="{path: 'sign-up'}"
-                             tag="md-button"
+                            tag="md-button"
                             class="md-primary">
                         Sign Up
                     </router-link>
@@ -44,61 +44,24 @@
         </form>
     </div>
 </template>
-
 <script>
     import UserService from '../../services/UserService'
     import Logo from '../Layout/Logo'
+    import VuexHelper from '../../helpers/VuexHelper';
+
+    const properties = ['user', 'token', 'email', 'password', 'isLogged'];
+    const storeProperties = VuexHelper.initComputed(...properties);
+
     export default {
         name: "LoginForm",
-        components:{Logo},
-        computed: {
-            user:{
-                get(){
-                    return this.$store.state.user
-                },
-                set(user){
-                    this.$store.commit('setState', ['user',user]);
-                }
-            },
-            token:{
-                get(){
-                    return this.$store.state.token
-                },
-                set(token){
-                    this.$store.commit('setState',['token', token])
-                }
-            },
-            email: {
-                get(){
-                    return this.$store.state.email;
-                },
-                set(email){
-                    this.$store.commit('setState', ['email',email]);
-                }
-            },
-            password: {
-                get(){
-                    return this.$store.state.password
-                },
-                set(password){
-                    this.$store.commit('setState', ['password',password]);
-                }
-            },
-            isLogged:{
-                get(){
-                    return this.$store.state.isLogged
-                },
-                set(isLogged){
-                    this.$store.commit('setState', ['isLogged', isLogged])
-                }
-            }
-        },
-        methods:{
-            login(){
+        components: {Logo},
+        computed: {...storeProperties},
+        methods: {
+            login() {
                 UserService
-                    .login(this.email,this.password)
+                    .login(this.email, this.password)
                     .then(res => {
-                        if(res.data){
+                        if (res.data) {
                             localStorage.setItem('user', JSON.stringify(res.data.user));
                             localStorage.setItem('token', res.data.token);
                             this.user = res.data.user;
@@ -108,17 +71,21 @@
                         }
                         else return false
                     })
-                    .catch(err => {console.log(err)})
+                    .catch(err => {
+                        console.log(err)
+                    })
             }
         }
     }
 </script>
 
+
 <style lang="scss" scoped>
     @import "../../scss/authorization.scss";
-    .login-form{
+
+    .login-form {
         align-self: center;
-        .card-actions{
+        .card-actions {
             justify-content: space-between;
         }
     }
